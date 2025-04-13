@@ -3,28 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # La rama 'main' es la que va a activar el flujo de trabajo
+      - main  # Activa cuando se hace un push a la rama main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Obtiene los archivos del repositorio
+        uses: actions/checkout@v3  # Clona el repositorio
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3  # Configura Node.js (necesario para las dependencias)
-
-      - name: Install dependencies (if any)
-        run: |
-          npm install  # Si tienes alguna dependencia, como un generador de sitio estático, ponla aquí
-
-      - name: Build website (if needed)
-        run: |
-          npm run build  # Este paso solo es necesario si estás utilizando herramientas de construcción como Gatsby, Jekyll, etc.
-        
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3  # Este es el paso que publica tu sitio en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Usa el token de GitHub
-          publish_dir: ./  # Aquí especificamos que se publicará desde la raíz (puedes cambiar si tus archivos están en otra carpeta)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # Publicar desde la raíz (ajusta si tus archivos están en otra carpeta)
