@@ -3,26 +3,20 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Cambia 'main' si usas otra rama
+      - main
+
+permissions:
+  contents: write  # ¡Esto es muy importante!
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
 
-      - name: Set up Git
-        run: |
-          git config --global user.name "Tu Nombre"
-          git config --global user.email "tu-email@dominio.com"
-
-      - name: Build the project (si es necesario)
-        run: echo "No build needed"
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy a GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .  # Publica el contenido de la raíz del repositorio
+          publish_dir: .  # Publicar desde la raíz
