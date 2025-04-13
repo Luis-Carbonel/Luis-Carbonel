@@ -3,17 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Activa cuando se hace un push a la rama main
+      - main  # Activa el flujo cuando hagas push a la rama main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Clona el repositorio
+        uses: actions/checkout@v3  # Clona el repositorio en el entorno de trabajo
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3  # Acción para desplegar en GitHub Pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Publicar desde la raíz (ajusta si tus archivos están en otra carpeta)
+          publish_dir: ./  # Publica desde la raíz del repositorio (ajusta si tus archivos están en una carpeta diferente)
